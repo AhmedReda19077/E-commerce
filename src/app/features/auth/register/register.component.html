@@ -1,0 +1,119 @@
+<h2
+  class="text-center text-green-600 text-3xl sm:text-3xl lg:text-4xl font-extrabold tracking-wide mt-10 md:mt-16 lg:mt-8 mb-8">
+  Register Form</h2>
+
+<div class="w-9/12 mx-auto">
+  <form [formGroup]="registerForm" (ngSubmit)="registerSubmit()" class="my-4">
+
+    <div class="mb-6">
+      <label class="text-green-700 block mb-2.5 text-sm font-medium ">Name : </label>
+      <input formControlName="name" type="text"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+
+      @if (registerForm.get("name")?.errors && registerForm.get("name")?.touched) {
+      @if(registerForm.get("name")?.errors?.["required"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        This field is required to continue.
+      </div>
+      }
+      @else if (registerForm.get("name")?.errors?.["minlength"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Username must be at least 3 characters long.
+      </div>
+      }
+      @else if (registerForm.get("name")?.errors?.["maxlength"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Username must not exceed 20 characters.
+      </div>
+      }
+      }
+
+    </div>
+
+    <div class="mb-6">
+      <label class="text-green-700 block mb-2.5 text-sm font-medium">Email address : </label>
+      <input formControlName="email" type="email"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+
+      @if (registerForm.get("email")?.errors && registerForm.get("email")?.touched) {
+      @if (registerForm.get("email")?.errors?.["required"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        This field is required to continue.
+      </div>
+      }
+      @else if (registerForm.get("email")?.errors?.["email"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Enter a valid email (e.g. name@example.com).
+      </div>
+      }
+      }
+
+    </div>
+
+    <div class="mb-6">
+      <label class="text-green-700 block mb-2.5 text-sm font-medium">Password : </label>
+      <input formControlName="password" type="password"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+
+      @if (registerForm.get("password")?.errors && registerForm.get("password")?.touched) {
+      @if (registerForm.get("password")?.errors?.["required"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        This field is required to continue.
+      </div>
+      }
+      @else if (registerForm.get("password")?.errors?.["pattern"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Password must be at least 8 characters and include uppercase, lowercase, and a number.
+      </div>
+      }
+      }
+    </div>
+
+    <div class="mb-6">
+      <label class="text-green-700 block mb-2.5 text-sm font-medium">Re-Password : </label>
+      <input formControlName="rePassword" type="password"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+
+      @if (registerForm.get("rePassword")?.errors && registerForm.get("rePassword")?.touched) {
+      @if (registerForm.get("rePassword")?.errors?.["required"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        This field is required to continue.
+      </div>
+      }
+      <!-- @else if (registerForm.get("rePassword")?.errors?.["pattern"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Please Enter Valid Repassword.
+      </div>
+      } -->
+      }
+      @if (registerForm.errors?.["notMatched"] && registerForm.get("rePassword")?.touched) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Please make sure both passwords match.
+      </div>
+      }
+    </div>
+
+    <div class="mb-6">
+      <label class="text-green-700 block mb-2.5 text-sm font-medium">Phone Number : </label>
+      <input formControlName="phone" type="tel"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+
+      @if (registerForm.get("phone")?.errors && registerForm.get("phone")?.touched) {
+      @if (registerForm.get("phone")?.errors?.["required"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        This field is required to continue.
+      </div>
+      }
+      @else if (registerForm.get("phone")?.errors?.["pattern"]) {
+      <div class="p-4 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        Invalid mobile number.
+      </div>
+      }
+      }
+    </div>
+
+    <button [disabled]="!registerForm.valid"
+      class="disabled:bg-green-300 disabled:cursor-not-allowed p-2 rounded text-white bg-green-600 cursor-pointer hover:bg-green-700 transition-all duration-300 ease-in-out "
+      type="submit">Register</button>
+  </form>
+</div>
